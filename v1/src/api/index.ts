@@ -6,7 +6,7 @@ import { getUserSessionObject } from "../utils/utilityFunctions";
 export const userLogin = async (params: any) => {
   try {
     const res = await axios
-      .post(import.meta.env.VITE_REACT_APP_API_URL + "/user/login", params)
+      .post(import.meta.env.VITE_REACT_APP_API_URL + "/api/user/login", params)
       .catch((error) => {
         checkResponseStatusCode(error.response);
         let responseError = new Error(error.response.data.message);
@@ -35,7 +35,7 @@ export const siteUsersFetch = async (params: any) => {
       headers: { Authorization: token },
     };
     const res = await axios
-      .post(import.meta.env.VITE_REACT_APP_API_URL + "/site-user/all",
+      .post(import.meta.env.VITE_REACT_APP_API_URL + "/api/site-user/all",
         params, config)
       .catch((error) => {
         checkResponseStatusCode(error.response);
@@ -65,7 +65,7 @@ export const siteUserFetch = async (params: any) => {
       headers: { Authorization: token },
     };
     const res = await axios
-      .get(import.meta.env.VITE_REACT_APP_API_URL + "/site-user/get", {
+      .get(import.meta.env.VITE_REACT_APP_API_URL + "/api/site-user/get", {
         ...config,
         params
       })
@@ -92,7 +92,7 @@ export const siteUserUpdateProfile = async (params: any, where: any) => {
       headers: { Authorization: token },
     };
     const res = await axios
-      .patch(import.meta.env.VITE_REACT_APP_API_URL + "/site-user/update-profile", {params, where}, config)
+      .patch(import.meta.env.VITE_REACT_APP_API_URL + "/api/site-user/update-profile", {params, where}, config)
       .catch((error) => {
         checkResponseStatusCode(error.response);
         let responseError = new Error(error.response.data.message);
@@ -116,7 +116,7 @@ export const siteUserUpdateBannedStatus = async (params: any) => {
       headers: { Authorization: token },
     };
     const res = await axios
-      .patch(import.meta.env.VITE_REACT_APP_API_URL + "/site-user/update-banned-status", params, config)
+      .patch(import.meta.env.VITE_REACT_APP_API_URL + "/api/site-user/update-banned-status", params, config)
       .catch((error) => {
         checkResponseStatusCode(error.response);
         let responseError = new Error(error.response.data.message);
