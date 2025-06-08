@@ -14,6 +14,7 @@ import {
   PlugInIcon,
   TableIcon,
   UserCircleIcon,
+  EnvelopeIcon,
 } from "../icons";
 import { useSidebar } from "../context/SidebarContext";
 import SidebarWidget from "./SidebarWidget";
@@ -35,6 +36,11 @@ const navItems: NavItem[] = [
     name: "Site Users",
     icon: <TableIcon />,
     subItems: [{ name: "User Management", path: "/site-users", pro: false }],
+  },
+  {
+    name: "Startups",
+    icon: <EnvelopeIcon />,
+    subItems: [{ name: "Startup Management", path: "/startups", pro: false }],
   },
   {
     icon: <CalenderIcon />,

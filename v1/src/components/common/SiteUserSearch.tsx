@@ -72,7 +72,7 @@ const SiteUserSearch: React.FC<SiteUserSearchProps> = ({
   const handleApplyFilter = () => {
     doGetSiteUsers(siteUserFilters)
   };
-  
+  console.log('siteUsers:::',siteUsers);
   const csvData = siteUsers.length > 0 ? convertToCSV(siteUsers) : [];
 
   return (

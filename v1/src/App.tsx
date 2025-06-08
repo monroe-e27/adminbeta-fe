@@ -13,7 +13,8 @@ import Buttons from "./pages/UiElements/Buttons";
 import LineChart from "./pages/Charts/LineChart";
 import BarChart from "./pages/Charts/BarChart";
 import Calendar from "./pages/Calendar";
-import DataTables from "./pages/Tables/DataTables";
+import SiteUserDataTables from "./pages/Tables/SiteUserDataTables";
+import StartupDataTables from "./pages/Tables/StartupDataTables";
 import FormElements from "./pages/Forms/FormElements";
 import Blank from "./pages/Blank";
 import AppLayout from "./layout/AppLayout";
@@ -41,7 +42,13 @@ export default function App() {
             <Route path="/form-elements" element={<FormElements />} />
 
             {/* Tables */}
-            <Route path="/site-users" element={<DataTables />} isProtected={true} />
+            <Route path="/site-users" element={
+              <MainContainer component={<SiteUserDataTables />} isProtected={true} />
+            } />
+
+            <Route path="/startups" element={
+              <MainContainer component={<StartupDataTables />} isProtected={true} />
+            } />
 
             {/* Ui Elements */}
             <Route path="/alerts" element={<Alerts />} />

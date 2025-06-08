@@ -4,7 +4,6 @@ import { useEffect } from "react";
 
 function useAuthCheck(isProtected: boolean) {
   const jwtData = useUserStore((state) => state.jwtData);
-  console.log('jwtData:::',jwtData);
 
   useEffect(() => {
     if (isProtected) validateAccess(jwtData);
