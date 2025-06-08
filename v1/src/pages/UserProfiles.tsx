@@ -73,7 +73,20 @@ export default function UserProfiles() {
           <UserInfoCard
             username={username}
             siteUser={siteUser}
+            nameSiteUser={nameSiteUser}
+            emailSiteUser={emailSiteUser}
+            headlineSiteUser={headlineSiteUser}
             doGetSiteUser={doGetSiteUser}
+            setEmailSiteUser={setEmailSiteUser}
+            setNameSiteUser={setNameSiteUser}
+            setHeadlineSiteUser={setHeadlineSiteUser}
+            doUpdateSiteUserProfile={doUpdateSiteUserProfile}
+            showLoader={showLoader}
+            showMessage={showMessage}
+            closeMessages={closeMessages}
+            showError={showError}
+            setProfileUpdateFlag={setProfileUpdateFlag}
+            profileUpdateFlag={profileUpdateFlag}
           />
           <UserAddressCard
           siteUser={siteUser} />

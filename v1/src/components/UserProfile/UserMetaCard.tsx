@@ -268,8 +268,6 @@ export default function UserMetaCard(
                     onChange={(e) => setHeadlineSiteUser(e.target.value)} 
                     />
                   </div>
-
-
                 </div>
               </div>
             </div>

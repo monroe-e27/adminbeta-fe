@@ -66,7 +66,6 @@ const store = (set: any, get: any) => ({
   },
   doGetSiteUsers: async (filter: any) => {
     try {
-      console.log('filter::',filter);
       let result = await siteUsersFetch(filter);
       if (result.status != 201) {
       } else {

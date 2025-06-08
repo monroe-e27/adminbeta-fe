@@ -9,6 +9,8 @@ import { useUserHook } from "../../hooks/useUser";
 import { useRedirect } from "../../hooks/useRedirect";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
+import { CSVLink, CSVDownload } from "react-csv";
+import { convertToCSV } from "../../utils/utilityFunctions";
 
 export default function DataTables() {
   const { userEmail } = useParams();
@@ -30,8 +32,12 @@ export default function DataTables() {
       <div className="space-y-6">
         <ComponentCard title="Site Users List">
           <SiteUserSearch
-            doGetSiteUsers={doGetSiteUsers}
             siteUserFilters={siteUserFilters}
+            siteUsers={siteUsers}
+            CSVLink={CSVLink}
+            CSVDownload={CSVDownload}
+            convertToCSV={convertToCSV}
+            doGetSiteUsers={doGetSiteUsers}
             setSiteUserFilters={setSiteUserFilters}
           />
           <DataTableOne

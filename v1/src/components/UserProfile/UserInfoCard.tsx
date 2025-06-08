@@ -5,22 +5,58 @@ import Input from "../form/input/InputField";
 import Label from "../form/Label";
 import { atobUri } from "../../utils/utilityFunctions.js";
 import { useState, useCallback, useEffect } from "react";
+import Badge from "../ui/badge/Badge.js";
 
 export default function UserInfoCard(
   { username,
     doGetSiteUser,
-    siteUser }:
+    siteUser,
+    emailSiteUser,
+    setEmailSiteUser,
+    nameSiteUser,
+    setNameSiteUser,
+    headlineSiteUser,
+    setHeadlineSiteUser,
+    doUpdateSiteUserProfile,
+    showLoader,
+    showMessage,  
+    closeMessages,
+    showError,
+    setProfileUpdateFlag,
+    profileUpdateFlag,
+  }:
     {
       username: string,
-      doGetSiteUser: (filter: any) => Promise<any>,
-      siteUser: any
+      doGetSiteUser: any,
+      siteUser: any,
+      emailSiteUser: any,
+      setEmailSiteUser: any,
+      nameSiteUser: any,
+      setNameSiteUser: any,
+      headlineSiteUser: any,
+      setHeadlineSiteUser: any,
+      doUpdateSiteUserProfile: any,
+      showLoader: any,
+      showMessage: any,
+      closeMessages: any,
+      showError: any,
+      setProfileUpdateFlag: any,
     }) {
   const [isOpen, setIsOpen] = useState(false);
   const openModal = useCallback(() => setIsOpen(true), []);
   const closeModal = useCallback(() => setIsOpen(false), []);
 
-  const handleSave = () => {
-    closeModal();
+  const handleSave = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const result = await doUpdateSiteUserProfile({
+      name: nameSiteUser,
+      headline: headlineSiteUser,
+      email: emailSiteUser,
+    }, { id: siteUser.id });
+    if (result.status == 201) {
+      closeModal();
+      setProfileUpdateFlag(true);
+    }
   };
 
   useEffect(() => {
@@ -56,20 +92,20 @@ export default function UserInfoCard(
 
             <div>
               <p className="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400">
-                Bio
+                Headline
               </p>
               <p className="text-sm font-medium text-gray-800 dark:text-white/90">
                 {siteUser.headline}
               </p>
             </div>
 
-            <div>
+            <div className={`${siteUser.banned ? "" : "hidden"}`}>
               <p className="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400">
                 Status
               </p>
-              <p className={`${siteUser.banned ? "text-red-500" : "text-green-800"} text-sm font-medium`}>
+              <Badge variant="solid" color={`${siteUser.banned ? "error" : "success"}`}>
                 {siteUser.banned ? "Banned" : "Active"}
-              </p>
+              </Badge>
             </div>
 
           </div>
@@ -109,34 +145,43 @@ export default function UserInfoCard(
             </p>
           </div>
           <form className="flex flex-col">
-            <div className="custom-scrollbar h-[450px] overflow-y-auto px-2 pb-3">
-              <div className="mt-7">
-                <h5 className="mb-5 text-lg font-medium text-gray-800 dark:text-white/90 lg:mb-6">
-                  Personal Information
-                </h5>
+            <div className="mt-7">
+              <h5 className="mb-5 text-lg font-medium text-gray-800 dark:text-white/90 lg:mb-6">
+                Personal Information
+              </h5>
 
-                <div className="grid grid-cols-1 gap-x-6 gap-y-5 lg:grid-cols-2">
-                  <div className="col-span-2 lg:col-span-1">
-                    <Label>First Name</Label>
-                    <Input type="text" value="Musharof" />
-                  </div>
+              <div className="grid grid-cols-1 gap-x-6 gap-y-5 lg:grid-cols-2">
 
-                  <div className="col-span-2 lg:col-span-1">
-                    <Label>Last Name</Label>
-                    <Input type="text" value="Chowdhury" />
-                  </div>
-
-                  <div className="col-span-2 lg:col-span-1">
-                    <Label>Email Address</Label>
-                    <Input type="text" value="randomuser@pimjo.com" />
-                  </div>
-
-
-                  <div className="col-span-2 lg:col-span-1">
-                    <Label>Bio</Label>
-                    <Input type="text" value="Team Manager" />
-                  </div>
+                <div className="col-span-2">
+                  <Label>Name</Label>
+                  <Input
+                    id="headline"
+                    name="headline"
+                    value={nameSiteUser}
+                    onChange={(e) => setNameSiteUser(e.target.value)}
+                  />
                 </div>
+
+                <div className="col-span-2">
+                  <Label>Headline</Label>
+                  <Input type="text"
+                    id="headline"
+                    name="headline"
+                    value={headlineSiteUser}
+                    onChange={(e) => setHeadlineSiteUser(e.target.value)}
+                  />
+                </div>
+
+                <div className="col-span-2">
+                  <Label>Email</Label>
+                  <Input type="text"
+                    id="email"
+                    name="email"
+                    value={emailSiteUser} 
+                    onChange={(e) => setEmailSiteUser(e.target.value)} 
+                  />
+                </div>
+
               </div>
             </div>
             <div className="flex items-center gap-3 px-2 mt-6 lg:justify-end">
