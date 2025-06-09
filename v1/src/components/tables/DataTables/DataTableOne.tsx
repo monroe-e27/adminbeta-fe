@@ -107,130 +107,37 @@ const columns: DataTableColumn[] = [
         </div>,
         sortable: true,
     },
-const DataTableOne = ({
-    siteUsers,
-    doGetSiteUsers,
-    handleRedirect,
-}: {
-    siteUsers: UserRow[],
-    doGetSiteUsers: () => void,
-    handleRedirect: (username: string) => void,
-}) => {
-    return (
-        <DataTable
-            columns={columns}
-            data={siteUsers}
-            pagination
-            paginationPerPage={10}
-            paginationRowsPerPageOptions={[10, 25, 50, 100]}
-            paginationComponentOptions={{
-                rowsPerPageText: 'Rows per page:',
-                rangeSeparatorText: 'of',
-            }}
-            customStyles={customStyles}
-            onRowClicked={(row) => handleRedirect(row.username)}
-        />
-    );
-};
-
-export default DataTableOne;
-        selector: row => row.name,
-        cell: row =>
-            <div className="px-5 py-4 sm:px-6 text-start">
-                <div className="flex items-center gap-3">
-                    <div>
-                        <span className="block font-medium text-gray-500 text-theme-lg dark:text-white/90">
-                            {row.name}
-                        </span>
-                        {/* <span className="block text-gray-500 text-theme-xs dark:text-gray-400">
-                            e27 Developer
-                        </span> */}
-                    </div>
-                </div>
-            </div>,
-        sortable: true,
-    },
-    {
-        name: 'Username',
-        selector: row => row.username,
-        cell: row =>
-            <div className="px-5 py-4 sm:px-6 text-start">
-                <div className="flex items-center gap-3">
-                    <div>
-                        <span className="block font-medium text-gray-500 text-theme-sm dark:text-white/90">
-                            {row.username}
-                        </span>
-                        {/* <span className="block text-gray-500 text-theme-xs dark:text-gray-400">
-                            e27 Developer
-                        </span> */}
-                    </div>
-                </div>
-            </div>,
-        sortable: true,
-    },
-    {
-        name: 'Email',
-        selector: row => row.email,
-        cell: row =>
-            <div className="px-5 py-4 sm:px-6 text-start">
-                <div className="flex items-center gap-3">
-                    <div>
-                        <span className="block text-blue-500 text-theme-sm dark:text-blue/90">
-                            {row.email}
-                        </span>
-                        {/* <span className="block text-blue-400 text-theme-xs dark:text-blue-90">
-                            {row.email}
-                        </span> */}
-                    </div>
-                </div>
-            </div>,
-        cell: row => <div className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-            <label className="inline-flex items-center cursor-pointer">
-                <input 
-                    type="checkbox" 
-                    value="" 
-                    className="sr-only peer" 
-                    defaultChecked={row.banned === 0 ? false : true}
-                    onChange={(e) => {
-                        const newStatus = e.target.checked ? 1 : 0;
-                        handleBannedStatusChange(row, newStatus);
-                    }}
-                />
-                <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-green-300 dark:peer-focus:ring-green-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600 dark:peer-checked:bg-green-600"></div>
-                <span className={`ms-3 text-sm font-light ${row.banned == 0 ? "text-green-900 dark:text-gray-300" : "text-red-900 dark:text-gray-300"}`}>
-                    {row.banned == 0 ? "Active" : "Inactive"}
-                </span>
-            </label>
-        </div>,
-        sortable: true,
-    },
 ];
 
-export default function DataTableOne(
-    {
-        siteUsers,
-        doGetSiteUsers,
-        handleRedirect,
-        userEmail,
-    }: {
-        siteUsers: any,
-        doGetSiteUsers: any,
-        handleRedirect: any,
-        userEmail: any,
-    }) {
+const customStyles = {
+    rows: {
+        style: {
+            minHeight: '72px',
+        },
+    },
+};
+
+interface DataTableOneProps {
+    siteUsers: UserRow[];
+    doGetSiteUsers: (filter: any) => Promise<any>;
+    handleRedirect: (path: string) => void;
+    userEmail?: string;
+}
+
+function DataTableOne({ siteUsers, doGetSiteUsers, handleRedirect, userEmail }: DataTableOneProps) {
     const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
         doGetSiteUsers(allUsers);
     }, []);
 
-    const filteredData = siteUsers.filter(item =>
+    const filteredData = siteUsers.filter((item: UserRow) =>
         Object.values(item).some(val =>
             val?.toString().toLowerCase().includes(searchTerm.toLowerCase())
         )
     );
 
-    const handleRowClick = (row: any) => {
+    const handleRowClick = (row: UserRow) => {
         handleRedirect(`/profile/${btoaUri(row.username)}`);
     }
 
@@ -257,3 +164,5 @@ export default function DataTableOne(
         </div>
     );
 }
+
+export default DataTableOne;
