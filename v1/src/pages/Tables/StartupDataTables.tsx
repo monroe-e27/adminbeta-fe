@@ -5,12 +5,14 @@ import DataTableStartups from "../../components/tables/DataTables/DataTableStart
 import StartupSearch from "../../components/common/StartupSearch";
 import { useStartupStore } from "../../store/startupStore";
 import { useStartupHook } from "../../hooks/useStartup";
+import { useRedirect } from "../../hooks/useRedirect";
 import { useEffect } from "react";
 
 
 export default function StartupDataTables() {
   const { startups, doGetStartups } = useStartupStore();
   const { startupFilters, setStartupFilters } = useStartupHook();
+  const { handleRedirect } = useRedirect();
 
   useEffect(() => {
     doGetStartups({});
@@ -33,6 +35,7 @@ export default function StartupDataTables() {
           <DataTableStartups
           startups={startups}
           doGetStartups={doGetStartups}
+          handleRedirect={handleRedirect}
           />
         </ComponentCard>
       </div>

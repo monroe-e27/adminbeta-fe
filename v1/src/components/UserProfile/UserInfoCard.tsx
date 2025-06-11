@@ -99,7 +99,7 @@ export default function UserInfoCard(
               </p>
             </div>
 
-            <div className={`${siteUser.banned ? "" : "hidden"}`}>
+            <div className={siteUser.banned}>
               <p className="mb-2 text-xs leading-normal text-gray-500 dark:text-gray-400">
                 Status
               </p>

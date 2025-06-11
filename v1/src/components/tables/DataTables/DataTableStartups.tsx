@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import DataTable from 'react-data-table-component';
+import { btoaUri } from "../../../utils/utilityFunctions.js";
 import Badge from "../../ui/badge/Badge";
 
 interface Startup {
@@ -95,7 +96,7 @@ export default function DataTableStartups({ startups, doGetStartups, handleRedir
 
     const handleRowClick = (row: Startup) => {
         if (handleRedirect) {
-            handleRedirect(`/startup/${row.id}`);
+            handleRedirect(`/profile/${btoaUri('test')}`);
         }
     };
 

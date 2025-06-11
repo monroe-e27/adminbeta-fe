@@ -1,13 +1,13 @@
-import PageBreadcrumb from "../components/common/PageBreadCrumb";
-import UserMetaCard from "../components/UserProfile/UserMetaCard";
-import UserInfoCard from "../components/UserProfile/UserInfoCard";
-import UserAddressCard from "../components/UserProfile/UserAddressCard";
-import PageMeta from "../components/common/PageMeta";
+import PageBreadcrumb from "../../components/common/PageBreadCrumb";
+import UserMetaCard from "../../components/UserProfile/UserMetaCard";
+import UserInfoCard from "../../components/UserProfile/UserInfoCard";
+import UserAddressCard from "../../components/UserProfile/UserAddressCard";
+import PageMeta from "../../components/common/PageMeta";
 import { useParams } from "react-router-dom";
-import { useUserStore } from "../store/userStore";
-import { useUserHook } from "../hooks/useUser";
+import { useUserStore } from "../../store/userStore";
+import { useUserHook } from "../../hooks/useUser";
 import { useEffect } from "react";
-import useLoader from "../hooks/useLoader";
+import useLoader from "../../hooks/useLoader";
 
 export default function UserProfiles() {
   const { username } = useParams();
