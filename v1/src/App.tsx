@@ -4,6 +4,7 @@ import SignIn from "./pages/AuthPages/SignIn";
 import SignUp from "./pages/AuthPages/SignUp";
 import NotFound from "./pages/OtherPage/NotFound";
 import UserProfiles from "./pages/User/UserProfiles";
+import StartupProfiles from "./pages/Startup/StartupProfiles";
 import Videos from "./pages/UiElements/Videos";
 import Images from "./pages/UiElements/Images";
 import Alerts from "./pages/UiElements/Alerts";
@@ -35,6 +36,7 @@ export default function App() {
 
             {/* Others Page */}
             <Route path="/profile/:username" element={<UserProfiles />} />
+            <Route path="/startup-profile/:startupName" element={<StartupProfiles />} />
             <Route path="/calendar" element={<Calendar />} />
             <Route path="/blank" element={<Blank />} />
 

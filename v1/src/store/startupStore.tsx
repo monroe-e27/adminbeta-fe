@@ -16,15 +16,20 @@ const store = (set: any, get: any) => ({
   doReset: () => set(initialState),
   doGetStartups: async (filter: any) => {
     try {
-      console.log('filter:::',filter);
       let result = await startupsFetch(filter);
-      console.log('result', result);
       if (result.status != 201) {
       } else {
         set({
           startups: result.data
         });
       }
+    } catch (e) {
+      console.log(e);
+    }
+  },
+  doGetStartup: async (filter: any) => {
+    try {
+      // let result = await startupFetch(filter);
     } catch (e) {
       console.log(e);
     }

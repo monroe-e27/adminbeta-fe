@@ -60,7 +60,6 @@ export const startupsFetch = async (params: any) => {
  */
 export const siteUsersFetch = async (params: any) => {
   try {
-    console.log('params::', params);
 
     const { jwtData } = getUserSessionObject();
     const { token } = jwtData;

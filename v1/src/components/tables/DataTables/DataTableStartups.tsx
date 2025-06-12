@@ -96,7 +96,7 @@ export default function DataTableStartups({ startups, doGetStartups, handleRedir
 
     const handleRowClick = (row: Startup) => {
         if (handleRedirect) {
-            handleRedirect(`/profile/${btoaUri('test')}`);
+            handleRedirect(`/startup-profile/${btoaUri(row.name)}`);
         }
     };
 
